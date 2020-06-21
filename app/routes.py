@@ -1,3 +1,5 @@
+from flask_cors import cross_origin
+
 from app import app
 from flask import jsonify,request
 import pickle
@@ -5,6 +7,7 @@ import numpy as np
 
 
 @app.route("/api/prediction/thunder", methods=['POST'])
+@cross_origin()
 def get_predictaion():
     feature_list_pr = []
     feature_order = ['dew_temp', 'dry_temp', 'relative_humidity', 'pressure']
@@ -49,5 +52,5 @@ def get_predictaion():
         'prediction': int(prediction)
 
     }
-
+    print(results)
     return jsonify(results)
